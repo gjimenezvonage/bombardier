@@ -31,6 +31,9 @@ type bombardier struct {
 	req5xx uint64
 	others uint64
 
+	req404 uint64
+	req429 uint64
+
 	conf        config
 	barrier     completionBarrier
 	ratelimiter limiter
@@ -240,6 +243,12 @@ func (b *bombardier) writeStatistics(
 		counter = &b.req3xx
 	case 4:
 		counter = &b.req4xx
+		if code == 404 {
+			atomic.AddUint64(&b.req404, 1)
+		}
+		if code == 429 {
+			atomic.AddUint64(&b.req429, 1)
+		}
 	case 5:
 		counter = &b.req5xx
 	default:
@@ -385,6 +394,8 @@ func (b *bombardier) gatherInfo() internal.TestInfo {
 			Req2XX: b.req2xx,
 			Req3XX: b.req3xx,
 			Req4XX: b.req4xx,
+			Req404: b.req404,
+			Req429: b.req429,
 			Req5XX: b.req5xx,
 			Others: b.others,
 

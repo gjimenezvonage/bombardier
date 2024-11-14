@@ -55,7 +55,7 @@ const (
 {{ end -}}
 {{ with .Result -}}
 {{ "  HTTP codes:" }}
-{{ printf "    1xx - %v, 2xx - %v, 3xx - %v, 4xx - %v, 5xx - %v" .Req1XX .Req2XX .Req3XX .Req4XX .Req5XX }}
+{{ printf "    1xx - %v, 2xx - %v, 3xx - %v, 4xx - %v, 5xx - %v, 404 - %v, 429 - %v" .Req1XX .Req2XX .Req3XX .Req4XX .Req5XX .Req404 .Req429 }}
 	{{- printf "\n    others - %v" .Others }}
 	{{- with .Errors }}
 		{{- "\n  Errors:"}}

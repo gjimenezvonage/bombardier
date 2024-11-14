@@ -86,6 +86,7 @@ type Results struct {
 
 	Req1XX, Req2XX, Req3XX, Req4XX, Req5XX uint64
 	Others                                 uint64
+	Req404, Req429                         uint64
 
 	Errors []ErrorWithCount
 
